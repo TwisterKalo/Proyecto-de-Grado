@@ -80,7 +80,7 @@ def mov_Servo(ang):
 
 while True:
     #pos = leer_gps(pos)
-    x = input("cual es el angulo?: ")
+    x = float(input("cual es el angulo?: "))
     print(x)
     mov_Servo(x)
     sleep(2)
