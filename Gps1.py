@@ -9,7 +9,7 @@ acc = np.array([0,0])
 max_speed = 4
 max_force = 0.25
 force = 0
-target = np.zeros(2)
+pos = np.zeros(2)
 a = 0
 i = 0
 
@@ -57,23 +57,24 @@ try:
                     longitud = longitud_grad + long_mmm
 #                     print(longitud)
 
-                target[0] = float(longitud)
-                target[1] = float(latitud)
-#                 print(target)
+                pos[0] = float(longitud)
+                pos[1] = float(latitud)
+#                 print(pos)
                 
-                def seek(ang):
-                    pos = np.array([-69.96621,18.46796133])
+                def seek():
+                    target = np.array([-69.96576,18.46350])
                     force = target - pos
 #                     print(force)
                     ang = mt.atan((force[1])/(force[0]))
-                    return ang = ang * (180/mt.pi)
+#                     print(ang)
+                    ang = ang * (180/mt.pi)
                     print(ang)
                     
-                def get_pwm(angle):
-                    return(ang/18.0)+2.5
+#                 def get_pwm(ang):
+#                     return(ang/18.0)+2.5
                     
                 seek()
-                get_pwm()
+#                 get_pwm()
                 
 except serial.SerialException:
     print("No hay GPS")
