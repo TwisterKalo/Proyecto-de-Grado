@@ -1,8 +1,13 @@
+#librerias
 import serial
 import numpy as np
 import math as mt
 from time import sleep
 
+#variables
+pos = np.zeros(2)
+
+#funciones
 def leer_gps():
     try:
         gps = serial.Serial(
@@ -25,33 +30,33 @@ def leer_gps():
             lat_ddd = lat_nmea[2:10]
             lat_mmm = float(lat_ddd) / 60
                     
-        if data[6] == 'S':
-            latitud_grad = float(lat_grad) * -1
-            latitud = latitud_grad - lat_mmm
+            if data[6] == 'S':
+                latitud_grad = float(lat_grad) * -1
+                latitud = latitud_grad - lat_mmm
 
-        else:
-            latitud_grad = float(lat_grad)
-            latitud = latitud_grad + lat_mmm
+            else:
+                latitud_grad = float(lat_grad)
+                latitud = latitud_grad + lat_mmm
 
                         
-        long_nmea = data[5]
-        long_grad = long_nmea[1:3]
-        long_ddd = long_nmea[3:10]
-        long_mmm = float(long_ddd) / 60
+            long_nmea = data[5]
+            long_grad = long_nmea[1:3]
+            long_ddd = long_nmea[3:10]
+            long_mmm = float(long_ddd) / 60
                     
-        if data[6] == 'W':
-            longitud_grad = float(long_grad) * -1
-            longitud = longitud_grad - long_mmm
+            if data[6] == 'W':
+                longitud_grad = float(long_grad) * -1
+                longitud = longitud_grad - long_mmm
 
-        else:
-            longitud_grad = float(long_grad)
-            longitud = longitud_grad + long_mmm
+            else:
+                longitud_grad = float(long_grad)
+                longitud = longitud_grad + long_mmm
 
 
-            pos[0] = float(longitud)
-            pos[1] = float(latitud)
+                pos[0] = float(longitud)
+                pos[1] = float(latitud)
 
-        return pos
+            return pos
 
                     
     except serial.SerialException:
