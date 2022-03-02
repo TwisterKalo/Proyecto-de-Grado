@@ -11,6 +11,9 @@ GPIO.setwarnings(False)
 GPIO.setup(32,GPIO.OUT)
 GPIO.setup(33,GPIO.OUT)
 
+servo = GPIO.PWM(32,ang)
+servo.start(0)
+
 #variables
 #posicion del GPS
 pos = np.zeros(2)
@@ -73,9 +76,8 @@ def leer_gps(pos):
         print("Fallo en comunicacion con el GPS!")
 
 def mov_Servo(ang):
-    servo = GPIO.PWM(32,ang)
-    servo.start(0)
-    sleep(2)
+    servo.ChangeDutyCycle(7.5) # neutral
+    sleep(1)
 
 
 while True:
