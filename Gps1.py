@@ -27,6 +27,8 @@ try:
             ser_bytes = gps.readline()
             decoded_bytes = ser_bytes.decode("utf-8")
             data = decoded_bytes.split(",")
+#             print(data)
+#             print(data[0])
             
             if data[0] == '$GNRMC':
                 lat_nmea = data[3]

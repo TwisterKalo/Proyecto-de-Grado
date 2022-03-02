@@ -10,17 +10,17 @@ GPIO.setup(33,GPIO.OUT)
 servo = GPIO.PWM(32,50)
 servo.start(0)
 # f.start(0)
-def get_pwm(angle):
+# def get_pwm(angle):
     
-    return(angle/18.0)+2.5
+#     return(angle/18.0)+2.5
     
-# servo.ChangeDutyCycle(2.5) # -90
-# sleep(1)
+servo.ChangeDutyCycle(2.5) # -90
+sleep(1)
 servo.ChangeDutyCycle(7.5) # neutral
 sleep(1)
-# servo.ChangeDutyCycle(12.5) #+90
-# sleep(1)
-# servo.stop()
+servo.ChangeDutyCycle(12.5) #+90
+sleep(1)
+servo.stop()
 
 
 
