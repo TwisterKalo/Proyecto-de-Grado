@@ -19,10 +19,10 @@ def leer_gps(pos):
         timeout=1
     )
             
-
-        ser_bytes = gps.readline()
-        decoded_bytes = ser_bytes.decode("utf-8")
-        data = decoded_bytes.split(",")
+        while data[0] != '$GNRMC':
+            ser_bytes = gps.readline()
+            decoded_bytes = ser_bytes.decode("utf-8")
+            data = decoded_bytes.split(",")
                 
         if data[0] == '$GNRMC':
             lat_nmea = data[3]
