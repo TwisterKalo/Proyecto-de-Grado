@@ -3,11 +3,20 @@ import serial
 import numpy as np
 import math as mt
 from time import sleep
+import RPi.GPIO as GPIO
+
+#configuracion de sistema
+GPIO.setmode(GPIO.BOARD)
+GPIO.setwarnings(False)
+GPIO.setup(32,GPIO.OUT)
+GPIO.setup(33,GPIO.OUT)
 
 #variables
+#posicion del GPS
 pos = np.zeros(2)
 
 #funciones
+#leer Gps
 def leer_gps(pos):
     try:
         gps = serial.Serial(
@@ -19,7 +28,7 @@ def leer_gps(pos):
         timeout=1
     )
         data = "0"
-        
+
         while data[0] != '$GNRMC':
             ser_bytes = gps.readline()
             decoded_bytes = ser_bytes.decode("utf-8")
@@ -63,10 +72,14 @@ def leer_gps(pos):
     except serial.SerialException:
         print("Fallo en comunicacion con el GPS!")
 
-print(pos)
+def mov_Servo(ang):
+    servo = GPIO.PWM(32,ang)
+    servo.start(0)
+    sleep(2)
+
 
 while True:
-    pos = leer_gps(pos)
-
-    print(pos)
+    #pos = leer_gps(pos)
+    x = input("cual es el angulo?: ")
+    print(x)
     sleep(2)
