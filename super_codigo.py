@@ -82,4 +82,5 @@ while True:
     #pos = leer_gps(pos)
     x = input("cual es el angulo?: ")
     print(x)
+    mov_Servo(x)
     sleep(2)
