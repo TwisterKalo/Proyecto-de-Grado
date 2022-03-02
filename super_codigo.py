@@ -18,7 +18,7 @@ def leer_gps(pos):
         bytesize=serial.EIGHTBITS,
         timeout=1
     )
-        data = 0
+        data = "0"
         
         while data[0] != '$GNRMC':
             ser_bytes = gps.readline()
