@@ -53,8 +53,8 @@ def leer_gps(pos):
                 longitud = longitud_grad + long_mmm
 
 
-                pos[0] = float(longitud)
-                pos[1] = float(latitud)
+            pos[0] = float(longitud)
+            pos[1] = float(latitud)
 
             return pos
 
