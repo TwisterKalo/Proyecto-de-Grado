@@ -8,7 +8,7 @@ from time import sleep
 pos = np.zeros(2)
 
 #funciones
-def leer_gps():
+def leer_gps(pos):
     try:
         gps = serial.Serial(
         port='/dev/ttyS0',
@@ -62,8 +62,10 @@ def leer_gps():
     except serial.SerialException:
         print("Fallo en comunicacion con el GPS!")
 
+print(pos)
+
 while True:
-    pos = leer_gps()
+    pos = leer_gps(pos)
 
     print(pos)
     sleep(2)
