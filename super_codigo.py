@@ -66,4 +66,4 @@ while True:
     pos = leer_gps()
 
     print(pos)
-    time.sleep(2)
+    sleep(2)
