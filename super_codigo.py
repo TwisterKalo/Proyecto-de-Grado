@@ -87,9 +87,7 @@ def mov_mo(v):
     print(v)
     f.ChangeDutyCycle(v)
 
-while True:
-    #pos = leer_gps(pos)
-    x = float(input("cual es la velocidad?: "))
-    print(x)
-    mov_mo(x)
-    sleep(2)
+#inicio del programa
+x = float(input("cual es la longitud?:  "))
+y = float(input("cual es la latitud?:  "))
+
