@@ -12,6 +12,7 @@ GPIO.setup(32,GPIO.OUT)
 GPIO.setup(33,GPIO.OUT)
 
 f = GPIO.PWM(33,100)
+f.start(0)
 
 servo = GPIO.PWM(32,50)
 servo.start(0)
@@ -83,6 +84,7 @@ def mov_Servo(ang):
     sleep(1)
 #mover el motor
 def mov_mo(v):
+    print(v)
     f.ChangeDutyCycle(v)
 
 while True:
