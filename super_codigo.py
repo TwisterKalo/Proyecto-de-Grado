@@ -88,6 +88,12 @@ def mov_mo(v):
     f.ChangeDutyCycle(v)
 
 #inicio del programa
-x = float(input("cual es la longitud?:  "))
-y = float(input("cual es la latitud?:  "))
+#x = float(input("cual es la longitud?:  "))
+#y = float(input("cual es la latitud?:  "))
 
+while True:
+    x = float(input("cual es el angulo?:  "))
+    mov_Servo(x)
+    x = float(input("cual es la velocidad?:  "))
+    mov_mo(x)
+    sleep(2)
