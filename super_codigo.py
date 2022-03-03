@@ -76,6 +76,7 @@ def leer_gps(pos):
         print("Fallo en comunicacion con el GPS!")
 
 def mov_Servo(ang):
+    ang = (ang/18.0)+2.5
     servo.ChangeDutyCycle(ang) # neutral
     sleep(1)
 
