@@ -11,6 +11,8 @@ GPIO.setwarnings(False)
 GPIO.setup(32,GPIO.OUT)
 GPIO.setup(33,GPIO.OUT)
 
+f = GPIO.PWM(33,100)
+
 servo = GPIO.PWM(32,50)
 servo.start(0)
 
@@ -74,16 +76,18 @@ def leer_gps(pos):
                     
     except serial.SerialException:
         print("Fallo en comunicacion con el GPS!")
-
+#mover el servo
 def mov_Servo(ang):
     ang = (ang/18.0)+2.5
     servo.ChangeDutyCycle(ang) # neutral
     sleep(1)
-
+#mover el motor
+def mov_mo(v):
+    f.ChangeDutyCycle(v)
 
 while True:
     #pos = leer_gps(pos)
-    x = float(input("cual es el angulo?: "))
+    x = float(input("cual es la velocidad?: "))
     print(x)
-    mov_Servo(x)
+    mov_mo(x)
     sleep(2)
