@@ -71,3 +71,4 @@ while True:
 
         print ("Heading Angle = %d°" %heading_angle)
         sleep(1)
+        print("listo")
