@@ -134,7 +134,7 @@ def leer_compas():
         if(heading < 0):
             heading=heading+2*pi
         #convertir a grados
-        heading_angle = int(heading * (180/pi))
+        heading_angle = int(heading * (180/pi)) - 225
         print("angulo = %d°" %heading_angle)
         sleep(0.5)
 #mover el servo
