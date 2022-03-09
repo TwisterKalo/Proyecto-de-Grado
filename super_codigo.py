@@ -152,8 +152,4 @@ def mov_mo(v):
 #y = float(input("cual es la latitud?:  "))
 
 while True:
-    x = float(input("cual es el angulo?:  "))
-    mov_Servo(x)
-    x = float(input("cual es la velocidad?:  "))
-    mov_mo(x)
-    sleep(2)
+    leer_compas()
