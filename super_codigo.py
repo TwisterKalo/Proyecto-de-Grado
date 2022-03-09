@@ -113,7 +113,7 @@ def leer_compas():
         valor = ((high << 8) | low)
     #obtener el signo
         if(valor > 32768):
-        valor = valor - 65536
+            valor = valor - 65536
         return valor
     #------------------------------------------main
     MagnetometerInit()
@@ -121,12 +121,12 @@ def leer_compas():
     while True:
         bandera = bus.read_byte_data(deviceAdress,RegStatus)
         a="{0:b}".format(bandera)
-        if a[len(a)-1] == 0:
+        if int(a[len(a)-2]) == 0:
             bandera = bus.read_byte_data(deviceAdress,RegStatus)
             x=read_raw_data(eje_X_Mag)
             y=read_raw_data(eje_Y_Mag)
             z=read_raw_data(eje_Z_Mag)
-            heading = math.atan2(y,x)+ declination
+            heading = mt.atan2(y,x)+ declination
         #compensar superiores a 360
         if(heading > 2*pi):
             heading = heding -2*pi
