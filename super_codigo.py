@@ -186,7 +186,10 @@ def angulo(target, pos1):
     return ang_gi, ubicacion
 #mover el servo
 def servo(ang):
-     kit.servo[13].angle = ang
+
+    x = ang + 90
+    x = min(max(0,x),180)
+    kit.servo[13].angle = x
     
 #inicio del programa
 x = float(input("cual es la longitud?:  "))
@@ -196,4 +199,6 @@ target = np.array([x,y])
 
 while True:
     ang, pos = angulo(target,pos)
+
+    servo(ang)
     print(ang)
