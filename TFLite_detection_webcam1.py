@@ -280,49 +280,7 @@ while True:
 #                    print(object_name)
                    found_match = 1
 #                    print("person")
-                   
-        if(found_match == 1):
-            contador_persona = contador_persona + 1
-#             print(contador_persona)
-                
-        if(contador_persona >= 250): #150 - 3 seg         250 - 4 seg
-            found_match = 0
-            contador_persona = 0
-            print("person NO")
-            
-    
-#     print("PRUEBA")          
-    if(found_match == True and paro == 0 and cont3 == 0):
-        variable = ChangeMode("MANUAL") # EVITAR OBSTACULO
-        print("MANUAL")
-        cont = 0
-        cont3 = 1
-        
-    elif(found_match == False and paro == 0 and cont == 0 and contador_persona == 0):
-        variable = ChangeMode("AUTO") # Mission Planner
-        print("AUTO")
-        cont = 1
-        cont3 = 0
-        sleep(0.1)
-     
-    if(GPIO.input(37) == True):
-       print("Limit Switch 3")
-       paro = 1
-       sleep(5)
-        
-    if(GPIO.input(37) == False):
-        if(paro == 1 and cont2 == 0):
-            ChangeMode("SMART_RTL")
-            cont2 = 1
-            print("RTL")
-            sleep(2)
-
-#         ChangeMode("HOLD")
-#         print("HOLD")
-#         sleep(2)
-#         ChangeMode("MANUAL")
-#         print("MANUAL")
-#         sleep(2)
+                               
                
     # Draw framerate in corner of frame
     cv2.putText(frame,'FPS: {0:.2f}'.format(frame_rate_calc),(30,50),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,0),2,cv2.LINE_AA)
