@@ -61,7 +61,7 @@ try:
 
                 pos[0] = float(longitud)
                 pos[1] = float(latitud)
-#                 print(pos)
+                print(pos)
                 
                 def seek():
                     target = np.array([-69.96576,18.46350])
@@ -70,7 +70,7 @@ try:
                     ang = mt.atan((force[1])/(force[0]))
 #                     print(ang)
                     ang = ang * (180/mt.pi)
-                    print(ang)
+#                     print(ang)
                     
 #                 def get_pwm(ang):
 #                     return(ang/18.0)+2.5

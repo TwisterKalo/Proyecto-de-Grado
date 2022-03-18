@@ -94,7 +94,7 @@ def leer_gps(pos):
 
             pos[0] = float(longitud)
             pos[1] = float(latitud)
-
+#             print(pos)
             return pos
 
                     
@@ -140,9 +140,8 @@ def leer_compas():
             heading=heading+2*pi
         #convertir a grados
         heading_angle = int(heading * (180/pi)) - 254
-        #print("angulo = %d°" %heading_angle)
+        print("angulo = %d°" %heading_angle)
         sleep(0.5)
-
         return heading_angle
         
 #mover el servo
@@ -155,34 +154,42 @@ def mov_mo(v):
     print(v)
     f.ChangeDutyCycle(v)
 #calcular el angulo de rotacion del robot
-def angulo(target):
+def angulo(target, pos1):
     #ang debe ser la orientacion del robot leida por los nodos del magnetometro
     ang = leer_compas()
-    ubicacion = leer_gps()
-
+#     print("angulo salido de la funcion = ",ang)
+    ang = (ang*mt.pi)/180
+#     print("angulo en radianes = ",ang)
+    ubicacion = leer_gps(pos1)
+#     print(ubicacion)
     #obj es la matriz homogenea para 2 dimenciones (x,y) teniendo el giro en Z 
     #obj es la postura del robot
-    obj = np.array([[-mt.sin(ang),mt.cos(ang),ubicacion[0]],[mt.cos(ang),mt.sin(ang),ubicacion[1]],[0,0,1]])
-    obj = np.linalg.inv(obj)
 
+    obj = np.array([[mt.cos(ang),-mt.sin(ang),ubicacion[0]],[mt.sin(ang),mt.cos(ang),ubicacion[1]],[0,0,1]])  # ([[-mt.sin(ang),mt.cos(ang),ubicacion[1]],[mt.cos(ang),mt.sin(ang),ubicacion[0]],[0,0,1]])
+#     print(obj)
+    obj = np.linalg.inv(obj)
+    
     #Target (seria bueno que se le pregunte al usuario el target de manera manual)
-    tar = np.array([target[0],target[0],[1]])
+    tar = np.array([[target[0]],[target[1]],[1]])
 
 
     #Calcular la posicion del target con respecto al robot
+    
+#     print(tar)
     pos = obj @ tar
 
-    #print(pos)
+#     print(pos)
     #print("La posicion del target con respecto al robot es: (x: %s , y: %s) " %(pos[0,0],pos[1,0]))
 
     #Se calcula el angulo de error (angulo que necesitamos rotar)
     ang_gi_rad = mt.atan2(pos[0,0],pos[1,0])
     ang_gi = ang_gi_rad* (180/3.14)
 
-    return ang_gi
+    return ang_gi, ubicacion
 #mover el servo
 def servo(ang):
      kit.servo[13].angle = ang
+    
 #inicio del programa
 x = float(input("cual es la longitud?:  "))
 y = float(input("cual es la latitud?:  "))
@@ -190,5 +197,5 @@ y = float(input("cual es la latitud?:  "))
 target = np.array([x,y])
 
 while True:
-    ang = angulo(target)
+    ang, pos = angulo(target,pos)
     print(ang)
