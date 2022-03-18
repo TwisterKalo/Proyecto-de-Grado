@@ -199,8 +199,14 @@ y = float(input("cual es la latitud?:  "))
 
 target = np.array([x,y])
 
-while True:
-    ang, pos = angulo(target,pos)
+#while True:
+#    ang, pos = angulo(target,pos)
 
+#    servo(ang)
+#    print(ang)
+
+while True:
     servo(ang)
-    print(ang)
+    time.sleep(0)
+    servo(ang)
+    time.sleep(30)
