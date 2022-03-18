@@ -5,6 +5,11 @@ import math as mt
 from time import sleep
 import RPi.GPIO as GPIO
 import smbus #comunicación I2C
+from adafruit_servokit import ServoKit
+
+
+#Inicializar pca
+kit = ServoKit(channels=16)
 
 #configuracion magnetometro
 #direcciones requeridas
@@ -175,6 +180,9 @@ def angulo(target):
     ang_gi = ang_gi_rad* (180/3.14)
 
     return ang_gi
+#mover el servo
+def servo(ang):
+     kit.servo[13].angle = ang
 #inicio del programa
 x = float(input("cual es la longitud?:  "))
 y = float(input("cual es la latitud?:  "))
