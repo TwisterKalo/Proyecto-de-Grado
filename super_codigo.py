@@ -191,7 +191,7 @@ def servo(ang):
     x = ang + 90
     x = min(max(0,x),180)
     kit.servo[13].angle = x
-    
+
 #inicio del programa
 x = float(input("cual es la longitud?:  "))
 y = float(input("cual es la latitud?:  "))
