@@ -205,7 +205,7 @@ target = np.array([x,y])
 #    print(ang)
 
 while True:
-    servo(ang)
-    time.sleep(0)
-    servo(ang)
-    time.sleep(30)
+    servo(0)
+    sleep(2)
+    servo(90)
+    sleep(2)
