@@ -122,7 +122,7 @@ def leer_compas():
         return valor
     #------------------------------------------main
     MagnetometerInit()
-    #print('leyendo magnetometro...')
+    print('leyendo magnetometro...')
     while True:
         bandera = bus.read_byte_data(deviceAdress,RegStatus)
         a="{0:b}".format(bandera)
@@ -151,16 +151,21 @@ def mov_Servo(ang):
     sleep(1)
 #mover el motor
 def mov_mo(v):
-    #print(v)
+    print(v)
     f.ChangeDutyCycle(v)
 #calcular el angulo de rotacion del robot
-def angulo(target, pos1):
+def angulo(target, pos1,x):
     #ang debe ser la orientacion del robot leida por los nodos del magnetometro
     ang = leer_compas()
 
     ang = (ang*mt.pi)/180
 
     ubicacion = leer_gps(pos1)
+    if x == 0:
+        posicion_x = ubicacion[0]
+        posicion_y = ubicacion[1] 
+        x=x+1
+
     #obj es la matriz homogenea para 2 dimenciones (x,y) teniendo el giro en Z 
     #obj es la postura del robot
 
@@ -184,28 +189,37 @@ def angulo(target, pos1):
     ang_gi_rad = mt.atan2(pos[0,0],pos[1,0])
     ang_gi = ang_gi_rad* (180/3.14)
 
-    return ang_gi, ubicacion
+    #regular la velocidad del motor segun la posicion
+    d = mt.sqrt(((target[0]-ubicacion[0])**2)+((target[1]-ubicacion[1])**2))
+    #convertir la distancia en un valor entre 50 y 80 para manejar el motor
+    d = map(d,0,5,50,80)
+    #un filtro para no pasarnos de 50 o de 80
+    d = min(max(50,d),80)
+
+    kit.servo[14].angle = d
+    
+    return ang_gi, ubicacion,x
 #mover el servo
 def servo(ang):
 
     x = ang + 90
     x = min(max(0,x),180)
     kit.servo[13].angle = x
+#mapear los datos 
+def map(x, in_min, in_max, out_min, out_max):
+		mapped =  float((x-in_min) * (out_max-out_min) / (in_max-in_min) + out_min)
+		return mapped  
 
 #inicio del programa
 x = float(input("cual es la longitud?:  "))
 y = float(input("cual es la latitud?:  "))
 
+x1 = 0
 target = np.array([x,y])
 
 while True:
-    ang, pos = angulo(target,pos)
+    ang, pos, x1 = angulo(target,pos,x1)
 
     servo(ang)
-    #print(ang)
+    print(ang)
 
-#while True:
-    #servo(0)
-    #sleep(2)
-    #servo(90)
-    #sleep(2)
