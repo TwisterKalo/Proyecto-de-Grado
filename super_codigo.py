@@ -122,7 +122,7 @@ def leer_compas():
         return valor
     #------------------------------------------main
     MagnetometerInit()
-    print('leyendo magnetometro...')
+    #print('leyendo magnetometro...')
     while True:
         bandera = bus.read_byte_data(deviceAdress,RegStatus)
         a="{0:b}".format(bandera)
@@ -151,7 +151,7 @@ def mov_Servo(ang):
     sleep(1)
 #mover el motor
 def mov_mo(v):
-    print(v)
+    #print(v)
     f.ChangeDutyCycle(v)
 #calcular el angulo de rotacion del robot
 def angulo(target, pos1):
@@ -198,14 +198,14 @@ y = float(input("cual es la latitud?:  "))
 
 target = np.array([x,y])
 
-#while True:
-#    ang, pos = angulo(target,pos)
-
-#    servo(ang)
-#    print(ang)
-
 while True:
-    servo(0)
-    sleep(2)
-    servo(90)
-    sleep(2)
+    ang, pos = angulo(target,pos)
+
+    servo(ang)
+    #print(ang)
+
+#while True:
+    #servo(0)
+    #sleep(2)
+    #servo(90)
+    #sleep(2)

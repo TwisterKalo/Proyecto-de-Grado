@@ -16,13 +16,25 @@ def servo(ang):
     print(x)
     kit.servo[14].angle = x
     
-while True:
-    g = kit.servo[14].angle
-    print(g)
-    servo(100)
+x = 75 
+while x > 20:
+    servo(x)
+    print("x = ", x)
     sleep(3)
-    servo(0)
-    sleep(30)
+    x = x - 5
+    
+#     g = kit.servo[14].angle       
+#     servo(0)
+#     sleep(30
+
+    
+    
+
+#     print(g)
+#     servo(6)
+#     sleep(3)
+#     servo(0)
+#     sleep(30)
 # Max Throttle (2000/100)
 # Min Throttle (700/~60)
 # Stop Throttle (0)
