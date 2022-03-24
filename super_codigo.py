@@ -94,7 +94,7 @@ def leer_gps(pos):
 
             pos[0] = float(longitud)
             pos[1] = float(latitud)
-#             print(pos)
+
             return pos
 
                     
@@ -157,16 +157,15 @@ def mov_mo(v):
 def angulo(target, pos1):
     #ang debe ser la orientacion del robot leida por los nodos del magnetometro
     ang = leer_compas()
-#     print("angulo salido de la funcion = ",ang)
+
     ang = (ang*mt.pi)/180
-#     print("angulo en radianes = ",ang)
+
     ubicacion = leer_gps(pos1)
-#     print(ubicacion)
     #obj es la matriz homogenea para 2 dimenciones (x,y) teniendo el giro en Z 
     #obj es la postura del robot
 
     obj = np.array([[mt.cos(ang),-mt.sin(ang),ubicacion[0]],[mt.sin(ang),mt.cos(ang),ubicacion[1]],[0,0,1]])  # ([[-mt.sin(ang),mt.cos(ang),ubicacion[1]],[mt.cos(ang),mt.sin(ang),ubicacion[0]],[0,0,1]])
-#     print(obj)
+
     obj = np.linalg.inv(obj)
     
     #Target (seria bueno que se le pregunte al usuario el target de manera manual)
@@ -175,10 +174,10 @@ def angulo(target, pos1):
 
     #Calcular la posicion del target con respecto al robot
     
-#     print(tar)
+
     pos = obj @ tar
 
-#     print(pos)
+
     #print("La posicion del target con respecto al robot es: (x: %s , y: %s) " %(pos[0,0],pos[1,0]))
 
     #Se calcula el angulo de error (angulo que necesitamos rotar)
