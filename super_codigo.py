@@ -122,7 +122,7 @@ def leer_compas():
         return valor
     #------------------------------------------main
     MagnetometerInit()
-    print('leyendo magnetometro...')
+    #print('leyendo magnetometro...')
     while True:
         bandera = bus.read_byte_data(deviceAdress,RegStatus)
         a="{0:b}".format(bandera)
@@ -151,7 +151,7 @@ def mov_Servo(ang):
     sleep(1)
 #mover el motor
 def mov_mo(v):
-    print(v)
+    #print(v)
     f.ChangeDutyCycle(v)
 #calcular el angulo de rotacion del robot
 def angulo(target, pos1,x):
@@ -161,6 +161,7 @@ def angulo(target, pos1,x):
     ang = (ang*mt.pi)/180
 
     ubicacion = leer_gps(pos1)
+    #print(ubicacion)
     if x == 0:
         posicion_x = ubicacion[0]
         posicion_y = ubicacion[1] 
@@ -191,19 +192,27 @@ def angulo(target, pos1,x):
 
     #regular la velocidad del motor segun la posicion
     d = mt.sqrt(((target[0]-ubicacion[0])**2)+((target[1]-ubicacion[1])**2))
+    print("distancia = ", d*10000)
     #convertir la distancia en un valor entre 50 y 80 para manejar el motor
-    d = map(d,0,5,50,80)
+    d = map(d*10000,0,5,50,80)
     #un filtro para no pasarnos de 50 o de 80
     d = min(max(50,d),80)
 
     kit.servo[14].angle = d
-    
+    print("vel = ", d)
     return ang_gi, ubicacion,x
 #mover el servo
 def servo(ang):
 
     x = ang + 90
     x = min(max(0,x),180)
+    if x > 160:
+        x = 160
+    elif x < 20:
+        x = 20
+    else:
+        pass
+    
     kit.servo[13].angle = x
 #mapear los datos 
 def map(x, in_min, in_max, out_min, out_max):
