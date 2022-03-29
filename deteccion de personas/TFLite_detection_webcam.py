@@ -222,7 +222,7 @@ while True:
                     print("xmin = ", xmin)
                     print("ymax = ", ymax)
                     print("ymin = ", ymin)
-                    cv2.circle(frame,((xmax-xmin),(ymax-ymin)),5,(255,0,0),2)
+                    cv2.circle(frame,((xmin+((xmax-xmin)/2)),((ymin+((ymax-ymin)/2)),5,(255,0,0),2)
                     found_match = 1
                     print("person")
 
@@ -230,7 +230,7 @@ while True:
     cv2.putText(frame,'FPS: {0:.2f}'.format(frame_rate_calc),(30,50),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,0),2,cv2.LINE_AA)
 
     # All the results have been drawn on the frame, so it's time to display it.
-    #cv2.imshow('Object detector', frame)
+    cv2.imshow('Object detector', frame)
 
     # Calculate framerate
     t2 = cv2.getTickCount()
