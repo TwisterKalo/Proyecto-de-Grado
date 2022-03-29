@@ -218,6 +218,10 @@ while True:
             
             if (scores[i] >= 0.50):
                 if(object_name == 'person'):
+                    print("xmax = ", xmax)
+                    print("xmin = ", xmin)
+                    print("ymax = ", ymax)
+                    print("ymin = ", ymin)
                     cv2.circle(frame,((xmax-xmin),(ymax-ymin)),5,(255,0,0),2)
                     found_match = 1
                     print("person")
