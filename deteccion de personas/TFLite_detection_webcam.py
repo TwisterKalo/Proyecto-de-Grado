@@ -218,9 +218,9 @@ while True:
             
             if (scores[i] >= 0.50):
                 if(object_name == 'person'):
-#                    print(object_name)
-                   found_match = 1
-                   print("person")
+                    cv2.circle(frame,((xmax-xmin),(ymax-ymin)),5,(255,0,0),2)
+                    found_match = 1
+                    print("person")
 
     # Draw framerate in corner of frame
     cv2.putText(frame,'FPS: {0:.2f}'.format(frame_rate_calc),(30,50),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,0),2,cv2.LINE_AA)
