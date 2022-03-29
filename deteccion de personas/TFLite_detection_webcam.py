@@ -222,7 +222,7 @@ while True:
                     print("xmin = ", xmin)
                     print("ymax = ", ymax)
                     print("ymin = ", ymin)
-                    cv2.circle(frame,((xmin+((xmax-xmin)/2)),((ymin+((ymax-ymin)/2)),5,(255,0,0),2)
+                    cv2.circle(frame,(int((xmin+((xmax-xmin)/2))),int((ymin+((ymax-ymin)/2)))),5,(255,0,0),2)
                     found_match = 1
                     print("person")
 
