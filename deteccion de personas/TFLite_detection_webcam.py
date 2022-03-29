@@ -240,10 +240,9 @@ def camara():
         frame_rate_calc= 1/time1
 
         # Press 'q' to quit
-        if cv2.waitKey(1) == ord('q'):
-            cv2.destroyAllWindows()
-            videostream.stop()
-            break
+        cv2.destroyAllWindows()
+        videostream.stop()
+        
         return x,y
 
 while True:
