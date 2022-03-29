@@ -246,5 +246,6 @@ def camara():
             break
         return x,y
 
-x,y = camara()
-print("(",x,",",y,")")
+while True:
+    x,y = camara()
+    print("(",x,",",y,")")
