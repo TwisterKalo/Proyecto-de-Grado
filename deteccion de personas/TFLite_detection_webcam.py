@@ -168,7 +168,7 @@ freq = cv2.getTickFrequency()
 videostream = VideoStream(resolution=(imW,imH),framerate=30).start()
 time.sleep(1)
 
-def camara():
+def camara(frame_rate_calc):
     #for frame1 in camera.capture_continuous(rawCapture, format="bgr",use_video_port=True):
     while True:
 
@@ -248,5 +248,5 @@ def camara():
         return x,y
 
 while True:
-    x,y = camara()
+    x,y = camara(frame_rate_calc)
     print("(",x,",",y,")")
