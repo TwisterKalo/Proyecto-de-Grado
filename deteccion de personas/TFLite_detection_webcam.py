@@ -242,8 +242,8 @@ def camara(frame_rate_calc):
         frame_rate_calc= 1/time1
 
         # Press 'q' to quit
-        cv2.destroyAllWindows()
-        videostream.stop()
+        #cv2.destroyAllWindows()
+        #videostream.stop()
 
         return x,y,frame_rate_calc
 
