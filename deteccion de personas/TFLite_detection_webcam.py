@@ -245,8 +245,8 @@ def camara(frame_rate_calc):
         cv2.destroyAllWindows()
         videostream.stop()
 
-        return x,y
+        return x,y,frame_rate_calc
 
 while True:
-    x,y = camara(frame_rate_calc)
+    x,y,frame_rate_calc = camara(frame_rate_calc)
     print("(",x,",",y,")")
