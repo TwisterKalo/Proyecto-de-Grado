@@ -244,7 +244,7 @@ def camara():
             cv2.destroyAllWindows()
             videostream.stop()
             break
-    return x,y
+        return x,y
 
 x,y = camara()
 print("(",x,",",y,")")
