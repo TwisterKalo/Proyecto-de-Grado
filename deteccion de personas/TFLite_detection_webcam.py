@@ -244,8 +244,11 @@ def camara(frame_rate_calc):
         # Press 'q' to quit
         #cv2.destroyAllWindows()
         #videostream.stop()
-
-        return x,y,frame_rate_calc
+        
+        try:
+            return x,y,frame_rate_calc
+        except UnboundLocalError:
+            return -1,-1,frame_rate_calc
 
 while True:
     x,y,frame_rate_calc = camara(frame_rate_calc)
