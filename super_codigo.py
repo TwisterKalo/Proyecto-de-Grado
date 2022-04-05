@@ -250,8 +250,5 @@ while True:
     
     print(ang)
 
-    if(GPIO.input(21)) == True:
-        modo = 4
+    while GPIO.input(21) == True:
         print("Modo Hold")
-        paro = 1
-        sleep(1)
