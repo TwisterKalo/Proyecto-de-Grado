@@ -212,7 +212,7 @@ def angulo(target, pos1,x):
     #un filtro para no pasarnos de 50 o de 80
     d = min(max(50,d),80)
 
-    #kit.servo[14].angle = d
+    kit.servo[14].angle = d
     #print("vel = ", d)
     return ang_gi, ubicacion,x
 #mover el servo
@@ -250,22 +250,16 @@ while True:
     #print("(",x,",",y,")")
     
     print(ang)
-
-    tn = 0
-    tv = time.time()
-    f = GPIO.input(21)
-    while f:
-        tn = time.time()
-        print(tn-tv)
-        if (tn-tv) > 5:
-            f = GPIO.input(21)
-        if f == False:
-            target = home
-            print("vamonos para la casa")
-
     
-        
-        
-
-
-        print("Modo Hold")
+    if kit.servo[14] <= 55:
+        tn = 0
+        tv = time.time()
+        f = GPIO.input(21)
+        while f:
+            tn = time.time()
+            print(tn-tv)
+            if (tn-tv) > 5:
+                f = GPIO.input(21)
+            if f == False:
+                target = home
+                print("vamonos para la casa")
