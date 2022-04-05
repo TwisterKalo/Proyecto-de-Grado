@@ -63,20 +63,13 @@ try:
                 pos[1] = float(latitud)
                 print(pos)
                 
-                def seek():
-                    target = np.array([-69.96576,18.46350])
-                    force = target - pos
-#                     print(force)
-                    ang = mt.atan((force[1])/(force[0]))
-#                     print(ang)
-                    ang = ang * (180/mt.pi)
-#                     print(ang)
-                    
-#                 def get_pwm(ang):
-#                     return(ang/18.0)+2.5
-                    
-                seek()
-#                 get_pwm()
-                
 except serial.SerialException:
     print("No hay GPS")
+    
+    #             while True:
+#                 try:
+#                     decoded_bytes = ser_bytes.decode("utf-8")
+#                     break
+#                 except UnicodeDecodeError:
+#                     pass
+#             print("listo")

@@ -16,12 +16,12 @@ def servo(ang):
     print(x)
     kit.servo[14].angle = x
     
-x = 50
+x = 100
 while x > 20:
     servo(x)
     print("x = ", x)
-    sleep(3)
-    x = x - 5
+    sleep(5)
+    x = 50
     
 #     g = kit.servo[14].angle       
 #     servo(0)
