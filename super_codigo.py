@@ -37,7 +37,7 @@ pi=3.14159265359
 #configuracion de sistema
 # GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
-# GPIO.setup(32,GPIO.OUT)
+GPIO.setup(21,GPIO.IN)
 # GPIO.setup(33,GPIO.OUT)
 
 # f = GPIO.PWM(33,100)
@@ -250,7 +250,7 @@ while True:
     
     print(ang)
 
-    if(GPIO.input(40)) == True:
+    if(GPIO.input(21)) == True:
         modo = 4
         print("Modo Hold")
         paro = 1
