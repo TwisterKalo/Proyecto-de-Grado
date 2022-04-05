@@ -239,7 +239,7 @@ y = float(input("cual es la latitud?:  "))
 
 x1 = 0
 target = np.array([x,y])
-home = leer_gps(pos1)
+home = leer_gps(pos)
 
 while True:
     ang, pos, x1 = angulo(target,pos,x1)
@@ -259,9 +259,11 @@ while True:
         print(tn-tv)
         if (tn-tv) > 5:
             f = GPIO.input(21)
+        if f == False:
+            target = home
+            print("vamonos para la casa")
 
-    target = home
-    print("vamonos para la casa")
+    
         
         
 
