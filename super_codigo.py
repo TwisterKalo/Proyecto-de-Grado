@@ -253,13 +253,15 @@ while True:
 
     tn = 0
     tv = time.time()
-    while GPIO.input(21) == True:
+    f = GPIO.input(21)
+    while f:
         tn = time.time()
         print(tn-tv)
         if (tn-tv) > 5:
-            target = home
+            f = GPIO.input(21)
 
-            print("vamonos para la casa")
+    target = home
+    print("vamonos para la casa")
         
         
 
