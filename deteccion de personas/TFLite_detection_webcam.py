@@ -263,4 +263,7 @@ iz = 102
 while True:
     x,y,frame_rate_calc = camara(frame_rate_calc)
     print("(",x,",",y,")")
-    servo(x)
+    if(x != -1):
+        servo(x)
+    else:
+        servo(613)
