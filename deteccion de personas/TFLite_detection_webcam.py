@@ -22,8 +22,9 @@ import sys
 import time
 from threading import Thread
 import importlib.util
+from adafruit_servokit import ServoKit
 
-
+kit = ServoKit(channels=16)
 # Define VideoStream class to handle streaming of video from webcam in separate processing thread
 # Source - Adrian Rosebrock, PyImageSearch: https://www.pyimagesearch.com/2015/12/28/increasing-raspberry-pi-fps-with-python-and-opencv/
 class VideoStream:
@@ -249,7 +250,17 @@ def camara(frame_rate_calc):
             return x,y,frame_rate_calc
         except UnboundLocalError:
             return -1,-1,frame_rate_calc
+def map(x, in_min, in_max, out_min, out_max):
+		mapped =  float((x-in_min) * (out_max-out_min) / (in_max-in_min) + out_min)
+		return mapped
 
+def servo(ang):
+der = 1124
+iz = 102
+    ang = map(ang,80,1200,180,0)
+    x = min(max(0,ang),180)
+    kit.servo[13].angle = x
 while True:
     x,y,frame_rate_calc = camara(frame_rate_calc)
     print("(",x,",",y,")")
+    servo(x)
