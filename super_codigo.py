@@ -154,7 +154,7 @@ def leer_compas():
             heading=heading+2*pi
         #convertir a grados
         heading_angle = int(heading * (180/pi)) - 254
-        print("angulo = %d°" %heading_angle)
+        #print("angulo = %d°" %heading_angle)
         sleep(0.5)
         return heading_angle
         
@@ -203,30 +203,33 @@ def angulo(target, pos1,x):
     #Se calcula el angulo de error (angulo que necesitamos rotar)
     ang_gi_rad = mt.atan2(pos[0,0],pos[1,0])
     ang_gi = ang_gi_rad* (180/3.14)
-
+    print("angulo de giro",ang_gi)
     #regular la velocidad del motor segun la posicion
     d = mt.sqrt(((target[0]-ubicacion[0])**2)+((target[1]-ubicacion[1])**2))
     #print("distanci-a = ", d*10000)
     #convertir la distancia en un valor entre 50 y 80 para manejar el motor
     d = map(d*10000,0,5,50,80)
     #un filtro para no pasarnos de 50 o de 80
-    d = min(max(50,d),80)
-
-    kit.servo[14].angle = d
-    #print("vel = ", d)
+    #d = min(max(50,d),80)
+    if d<53.5:
+        kit.servo[14].angle = 0
+    else:
+        kit.servo[14].angle = 57
+        
+    print("vel = ", d)
     return ang_gi, ubicacion,x
 #mover el servo
 def servo(ang):
 
-    x = ang + 90
+    x = map(ang, -100, 100, 0, 180)
     x = min(max(0,x),180)
-    if x > 110:
-        x = 110
-    elif x < 70:
-        x = 70
-    else:
-        pass
-    
+    #if x > 110:
+        #x = 110
+    #elif x < 70:
+        #x = 70
+    #else:
+        #pass
+    print("angulo real del servo",x)
     kit.servo[13].angle = x
 #mapear los datos 
 def map(x, in_min, in_max, out_min, out_max):
@@ -239,9 +242,11 @@ y = float(input("cual es la latitud?:  "))
 
 x1 = 0
 target = np.array([x,y])
-home = leer_gps(pos)
+home = np.array([-69.945855,18.473295])
 
+print("home:    ", home)
 while True:
+    print("target:    ",target)
     ang, pos, x1 = angulo(target,pos,x1)
 
     servo(ang)
@@ -250,16 +255,19 @@ while True:
     #print("(",x,",",y,")")
     
     print(ang)
-    
-    if kit.servo[14] <= 55:
+    #print(kit.servo[14])
+    if kit.servo[14].angle <= 55:
         tn = 0
         tv = time.time()
         f = GPIO.input(21)
         while f:
+            print("probando")
             tn = time.time()
-            print(tn-tv)
+            #print(tn-tv)
             if (tn-tv) > 5:
                 f = GPIO.input(21)
             if f == False:
+                target = 0
                 target = home
                 print("vamonos para la casa")
+            sleep(0.5)

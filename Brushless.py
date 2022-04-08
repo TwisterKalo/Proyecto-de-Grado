@@ -1,4 +1,4 @@
-#librerias
+#librerias0
 import serial
 import numpy as np
 import math as mt
@@ -14,14 +14,11 @@ def servo(ang):
     x = ang
     x = min(max(0,x),100)
     print(x)
-    kit.servo[14].angle = x
+    kit.servo[13].angle = x
     
-x = 100
-while x > 20:
+while True:
+    x = float(input("velocidad del motor     "))
     servo(x)
-    print("x = ", x)
-    sleep(5)
-    x = 50
     
 #     g = kit.servo[14].angle       
 #     servo(0)

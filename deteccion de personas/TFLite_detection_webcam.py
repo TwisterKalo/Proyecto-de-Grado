@@ -255,9 +255,7 @@ def map(x, in_min, in_max, out_min, out_max):
 		return mapped
 
 def servo(ang):
-der = 1124
-iz = 102
-    ang = map(ang,80,1200,180,0)
+    ang = map(ang,80,1200,120,60)
     x = min(max(0,ang),180)
     kit.servo[13].angle = x
 while True:
