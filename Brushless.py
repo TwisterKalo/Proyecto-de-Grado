@@ -12,13 +12,21 @@ kit = ServoKit(channels=16)
 def servo(ang):
 
     x = ang
-    x = min(max(0,x),100)
+    x = min(max(0,x),180)
+    print(x)
+    kit.servo[14].angle = x
+def servo1(ang):
+
+    x = ang
+    x = min(max(0,x),180)
     print(x)
     kit.servo[13].angle = x
-    
+        
 while True:
     x = float(input("velocidad del motor     "))
+    y = float(input("angulo del motor     "))
     servo(x)
+    servo1(y)
     
 #     g = kit.servo[14].angle       
 #     servo(0)

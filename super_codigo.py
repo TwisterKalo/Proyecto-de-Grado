@@ -175,7 +175,7 @@ def angulo(target, pos1,x):
     ang = (ang*mt.pi)/180
 
     ubicacion = leer_gps(pos1)
-    print(ubicacion)
+    #print(ubicacion)
     if x == 0:
         posicion_x = ubicacion[0]
         posicion_y = ubicacion[1] 
@@ -203,7 +203,7 @@ def angulo(target, pos1,x):
     #Se calcula el angulo de error (angulo que necesitamos rotar)
     ang_gi_rad = mt.atan2(pos[0,0],pos[1,0])
     ang_gi = ang_gi_rad* (180/3.14)
-    print("angulo de giro",ang_gi)
+    #print("angulo de giro",ang_gi)
     #regular la velocidad del motor segun la posicion
     d = mt.sqrt(((target[0]-ubicacion[0])**2)+((target[1]-ubicacion[1])**2))
     #print("distanci-a = ", d*10000)
@@ -211,7 +211,7 @@ def angulo(target, pos1,x):
     d = map(d*10000,0,5,50,80)
     #un filtro para no pasarnos de 50 o de 80
     #d = min(max(50,d),80)
-    if d<53.5:
+    if d<54:
         kit.servo[14].angle = 0
     else:
         kit.servo[14].angle = 57
@@ -222,14 +222,14 @@ def angulo(target, pos1,x):
 def servo(ang):
 
     x = map(ang, -100, 100, 0, 180)
-    x = min(max(0,x),180)
+    x = min(max(75,x),170)
     #if x > 110:
         #x = 110
     #elif x < 70:
         #x = 70
     #else:
         #pass
-    print("angulo real del servo",x)
+    #print("angulo real del servo",x)
     kit.servo[13].angle = x
 #mapear los datos 
 def map(x, in_min, in_max, out_min, out_max):
@@ -242,11 +242,11 @@ y = float(input("cual es la latitud?:  "))
 
 x1 = 0
 target = np.array([x,y])
-home = np.array([-69.945855,18.473295])
+home = np.array([-69.9458347,18.4733334])
 
-print("home:    ", home)
+#print("home:    ", home)
 while True:
-    print("target:    ",target)
+    #print("target:    ",target)
     ang, pos, x1 = angulo(target,pos,x1)
 
     servo(ang)
@@ -254,7 +254,7 @@ while True:
     #x,y,frame_rate_calc = camara(frame_rate_calc)
     #print("(",x,",",y,")")
     
-    print(ang)
+    #print(ang)
     #print(kit.servo[14])
     if kit.servo[14].angle <= 55:
         tn = 0
